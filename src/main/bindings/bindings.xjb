@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings
+    xmlns:jxb="https://jakarta.ee/xml/ns/jaxb"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    jxb:version="3.0">
+    
+    <jxb:bindings schemaLocation="../xsd/demo-config.xsd">
+        <jxb:bindings node="//xs:simpleType[@name='CycleVersion']/xs:restriction/xs:enumeration[@value='1.0']">
+            <jxb:typesafeEnumMember name="V1_0"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='CycleVersion']/xs:restriction/xs:enumeration[@value='2.0']">
+            <jxb:typesafeEnumMember name="V2_0"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='CycleVersion']/xs:restriction/xs:enumeration[@value='2.1-2.9']">
+            <jxb:typesafeEnumMember name="V2_1_TO_V2_9"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='CycleVersion']/xs:restriction/xs:enumeration[@value='3.0']">
+            <jxb:typesafeEnumMember name="V3_0"/>
+        </jxb:bindings>
+    </jxb:bindings>
+</jxb:bindings>
+

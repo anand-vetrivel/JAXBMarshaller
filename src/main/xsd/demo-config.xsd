@@ -1,0 +1,150 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xs:schema version="1.1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://eswari.com/srp/neonatal/delivery/v2_0"
+           targetNamespace="http://eswari.com/srp/neonatal/delivery/v2_0"
+           xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+           vc:minVersion="1.1"
+>
+
+    <xs:element name="config-rx">
+        <xs:annotation>
+            <xs:documentation>
+                Payload and the Root element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="content-version" type="xs:long">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Version of the file
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="connected-health-id" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Connected Health Id
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="provider-id" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Id of the Healthcare Provider
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="patient-id" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Id of the Patient
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="cycle-type" type="CycleType">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Type of the Cycle
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="cycle-version" type="CycleVersion">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Version of the Cycle
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:choice>
+                    <xs:element name="pat-detail" type="xs:base64Binary">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Base64 representation of the pat_detail file.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="procedure-files-bundle" type="xs:base64Binary">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Base64 representation of the procedure_files_bundle
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+                <xs:element name="xray-bin" type="xs:base64Binary">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Base64 representation of the xray.bin file
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="summary-xml" type="xs:base64Binary">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Base64 representation of the summary.xml file
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="security-info" type="SecurityInfo" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Contains details of the certificates used
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="format-version" type="FormatVersion">
+                <xs:annotation>
+                    <xs:documentation>
+                        Version of the payload format
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:simpleType name="FormatVersion" >
+        <xs:restriction base="xs:byte">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CycleVersion" >
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1.0"/>
+            <xs:enumeration value="2.0"/>
+            <xs:enumeration value="2.1-2.9"/>
+            <xs:enumeration value="3.0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CycleType" >
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Spring"/>
+            <xs:enumeration value="Fall"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="SecurityInfo">
+        <xs:sequence>
+            <xs:element name="provider-cert" type="xs:base64Binary">
+                <xs:annotation>
+                    <xs:documentation>
+                        Provider's Signing Cert (public)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="business-cert" type="xs:base64Binary">
+                <xs:annotation>
+                    <xs:documentation>
+                        Business Cert (public)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
